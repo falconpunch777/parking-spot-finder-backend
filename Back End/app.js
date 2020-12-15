@@ -56,6 +56,7 @@ app.get("/test", (req, res) => {
 
 
 
+<<<<<<< HEAD
 
 */
 var express = require('express')
@@ -142,6 +143,29 @@ app.post('/users/register', (req, res) => {
   
     
     //https://www.youtube.com/watch?v=W-sZo6Gtx_E
+=======
+app.get("/users/signin", (req, res) => {
+
+    https.post('client token', (response) => {
+        let rdata = '';
+
+        // called when the complete response is received.
+        response.on('end', () => {
+            if (response.statusCode === 200) {
+                //https://www.youtube.com/watch?v=_EP2qCmLzSE
+               //formulate data to send 
+             //   res.send({ });
+            } else {
+                res.send("Error: Status code is not 200");
+            }
+
+        });
+
+    }).on("error", (error) => {
+        console.log("Error: " + error.message);
+        res.send("Error: " + error.message);
+    });
+>>>>>>> 46f5151122298f728fde16f00f5518672ec68e42
 
 });
 
@@ -150,10 +174,13 @@ app.post('/users/register', (req, res) => {
 
 
 
+<<<<<<< HEAD
 app.get('/', function (req, res) {
     console.log("Connected!");
     res.send('Hello World!')
 });
 
 
+=======
+>>>>>>> 46f5151122298f728fde16f00f5518672ec68e42
 app.listen(5000)
