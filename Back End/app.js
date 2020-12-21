@@ -112,60 +112,55 @@ db.connect(function (err) {
 
 app.post('/users/register', (req, res) => {
 
-    const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
+    const password_confirmation = req.body.password_confirmation;
 
-   
-    console.log("Connected!");
-    console.log(req.body.username);
-     
-           // db.query("SELECT * FROM memer", (_err, result) => { console.log(result)});
-    db.query("INSERT INTO user (username, password) VALUES (?,?)",  [username, password], (err, result) => {
-        console.log(err);
 
-      
+    console.log("we made it here???");
 
+
+
+    db.query("INSERT INTO user (email, password) VALUES (?,?)", [email, password], (err, result) => {
+        if (err) {
+            res.send({ err: err });
+        }
+
+       /* if (result.length > 0) {
+            res.send(result);
+        } else {
+            res.send({ message: "hmm" });
+        }
+        */
 
     });
-            
-    //res.send('hi');
-    res.send(username);
-       
+
+    res.send(email);
+
+
+});
+
  
 
+app.post("/users/login", (req, res) => {
 
-   /*
-        db.query("INSERT INTO users (username, password) VALUES (?,?)", [username, password], (err, result) => {
-            console.log(err);
-        )}
-     */
+    const email = req.body.email;
+    const password = req.body.password;
 
-  
-    
-    //https://www.youtube.com/watch?v=W-sZo6Gtx_E
-=======
-app.get("/users/signin", (req, res) => {
 
-    https.post('client token', (response) => {
-        let rdata = '';
+    console.log("Connected!");
+    db.query("SELECT * FROM user WHERE username = ? AND password = ?", [email, password], (err, result) => {
+        if (err) {
+            res.send({ err: err });
+        }
 
-        // called when the complete response is received.
-        response.on('end', () => {
-            if (response.statusCode === 200) {
-                //https://www.youtube.com/watch?v=_EP2qCmLzSE
-               //formulate data to send 
-             //   res.send({ });
-            } else {
-                res.send("Error: Status code is not 200");
-            }
+        if (result.length > 0) {
+            res.send(result);
+        } else {
+            res.send({ message: "wrong email or password" });
+        }
 
-        });
-
-    }).on("error", (error) => {
-        console.log("Error: " + error.message);
-        res.send("Error: " + error.message);
     });
->>>>>>> 46f5151122298f728fde16f00f5518672ec68e42
 
 });
 
@@ -174,13 +169,10 @@ app.get("/users/signin", (req, res) => {
 
 
 
-<<<<<<< HEAD
 app.get('/', function (req, res) {
     console.log("Connected!");
     res.send('Hello World!')
 });
 
 
-=======
->>>>>>> 46f5151122298f728fde16f00f5518672ec68e42
 app.listen(5000)
