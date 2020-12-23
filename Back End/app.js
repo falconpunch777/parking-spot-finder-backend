@@ -149,7 +149,7 @@ app.post("/users/login", (req, res) => {
 
 
     console.log("Connected!");
-    db.query("SELECT * FROM user WHERE username = ? AND password = ?", [email, password], (err, result) => {
+    db.query("SELECT * FROM user WHERE email = ? AND password = ?", [email, password], (err, result) => {
         if (err) {
             res.send({ err: err });
         }
