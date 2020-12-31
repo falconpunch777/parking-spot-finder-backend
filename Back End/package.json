@@ -15,11 +15,8 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "mysql": "^2.18.1",
-<<<<<<< HEAD
     "path": "^0.12.7",
     "universal-cookie": "^4.0.4"
-=======
-    "path": "^0.12.7"
->>>>>>> 774033d42df29670bc0b6e61ebbd8fa67241cc28
+
   }
 }

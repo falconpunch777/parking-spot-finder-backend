@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 var express = require('express')
 var app = express()
@@ -9,18 +9,11 @@ var session = require('express-session')
 var path = require('path');
 
 var bodyParser = require('body-parser');
-=======
-/*
->>>>>>> 774033d42df29670bc0b6e61ebbd8fa67241cc28
 
 
-app.get("/users/signin", (req, res) => {
 
-<<<<<<< HEAD
-app.use(express.json());
 
-app.use(myLogger)
-app.use(cors());
+
 
 var pool = mysql.createPool({
     connectionLimit: 25,
@@ -29,33 +22,8 @@ var pool = mysql.createPool({
     password: 'Kingbatabob7!',
     port: '3306',
     database: 'corhol5_parkingspotfinder'
-=======
-    https.post('client token', (response) => {
-        let rdata = '';
-
-        // called when the complete response is received.
-        response.on('end', () => {
-            if (response.statusCode === 200) {
-                //https://www.youtube.com/watch?v=_EP2qCmLzSE
-               //formulate data to send 
-             //   res.send({ });
-            } else {
-                res.send("Error: Status code is not 200");
-            }
-
-        });
-
-    }).on("error", (error) => {
-        console.log("Error: " + error.message);
-        res.send("Error: " + error.message);
-    });
-
 });
->>>>>>> 774033d42df29670bc0b6e61ebbd8fa67241cc28
-
-
-});
-
+  
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -66,31 +34,22 @@ app.use((req, res, next) => {
     }
     next();
 });
-/*
-db.connect(function (err) {
-    if (err) {
-        return console.error('error: ' + err.message);
-    }
 
-    console.log('Connected to the MySQL server.');
-  
-});*/
- 
 app.post('/users/register', (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    const password_confirmation = req.body.password_confirmation;
+    const email = req.email;
+    const password = req.password;
+    const password_confirmation = req.password_confirmation;
 
 
-  
+    console.log(email);
     
     pool.getConnection(function (err, connection) {
         console.log("Connected!");
 
-        if (!email || !password || !password_confirmation) {
+       /* if (!email || !password || !password_confirmation) {
             res.send({ errormessage: "Please fill in all the fields" });
             return;
-        }
+        }*/
 
         //Check passwords match
         if (password != password_confirmation) {
@@ -108,7 +67,8 @@ app.post('/users/register', (req, res) => {
 
         connection.query("SELECT email FROM user WHERE email = ?", [email], (err, result) => {
             if (err) throw err;
-          
+
+            
             //You will get an array. if no users found it will return.
 
             if (result.length > 0) {
@@ -140,10 +100,10 @@ app.post('/users/register', (req, res) => {
 
 app.post("/users/login", (req, res) => {
 
-    const email = req.body.email;
-    const password = req.body.password;
+    const email = req.email;
+    const password = req.password;
 
-<<<<<<< HEAD
+
     pool.getConnection(function (err, connection) {
 
 
@@ -157,7 +117,7 @@ app.post("/users/login", (req, res) => {
                 res.send(result);
                // res.send({message: "correct"});
             } else {
-                res.send({ errormessage: "wrong email or password" });
+                res.send({ errormessage: "Wrong email or password" });
             }
 
         });
@@ -178,18 +138,9 @@ app.post("/spots/save", (req, res) => {
     
     //https://stackoverflow.com/questions/51109559/get-cookie-with-react
     console.log("Connected!");
-=======
-<<<<<<< HEAD
+
 
 */
-var express = require('express')
-var app = express()
-var https = require('https')
-var mysql = require('mysql')
-var cors = require('cors')
-var session = require('express-session')
-var path = require('path');
-var bodyParser = require('body-parser');
 
 
 var myLogger = function (req, res, next) {
@@ -197,100 +148,7 @@ var myLogger = function (req, res, next) {
     next()
 }
 
-app.use(express.json());
 
-app.use(myLogger)
-app.use(cors());
-
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'password',
-    port: '3306',
-    database: 'mydbtest667'
-
-
-});
-
-
-
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-    if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-        return res.status(200).json({});
-    }
-    next();
-});
-
-db.connect(function (err) {
-    if (err) {
-        return console.error('error: ' + err.message);
-    }
-
-    console.log('Connected to the MySQL server.');
-  
-});
-
-app.post('/users/register', (req, res) => {
-
-    const email = req.body.email;
-    const password = req.body.password;
-    const password_confirmation = req.body.password_confirmation;
-
-
-    console.log("we made it here???");
-
-
-
->>>>>>> 774033d42df29670bc0b6e61ebbd8fa67241cc28
-    db.query("INSERT INTO user (email, password) VALUES (?,?)", [email, password], (err, result) => {
-        if (err) {
-            res.send({ err: err });
-        }
-
-<<<<<<< HEAD
-        
-=======
-       /* if (result.length > 0) {
-            res.send(result);
-        } else {
-            res.send({ message: "hmm" });
-        }
-        */
->>>>>>> 774033d42df29670bc0b6e61ebbd8fa67241cc28
-
-    });
-
-    res.send(email);
-
-
-});
-
- 
-
-app.post("/users/login", (req, res) => {
-
-    const email = req.body.email;
-    const password = req.body.password;
-
-
-    console.log("Connected!");
-    db.query("SELECT * FROM user WHERE email = ? AND password = ?", [email, password], (err, result) => {
-        if (err) {
-            res.send({ err: err });
-        }
-
-        if (result.length > 0) {
-            res.send(result);
-        } else {
-            res.send({ message: "wrong email or password" });
-        }
-
-    });
-
-});
 
 
 
@@ -302,12 +160,5 @@ app.get('/', function (req, res) {
     res.send('Hello World!')
 });
 
-
-
-app.get('/', function (req, res) {
-    console.log("Connected!");
-    res.send('Hello World!')
-});
-*/
 
 app.listen(5000)
